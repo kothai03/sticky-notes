@@ -1,4 +1,4 @@
-// Application queries comes here.
+// Application db queries comes here.
 const db = require('./mongo');
 
 // Fetch single record from Collection.
@@ -22,12 +22,12 @@ const insertOne = (collectionName, queryOptions) =>
   });
 
 // Update document.
-const updateOne = (collectionName, queryOptions, value) =>
+const updateOne = (collectionName, queryOptions, stickyDetails) =>
   new Promise((resolve, reject) => {
     db.collection(collectionName)
       .update(
         queryOptions,
-        value,
+        stickyDetails,
         { upsert: true },
         (err, result) => {
           if (err) return reject(err);

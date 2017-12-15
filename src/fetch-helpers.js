@@ -5,24 +5,35 @@ const chance = new Chance();
 const { insertOne, updateOne } = require('./fetch-from-db');
 
 // Add Collection names.
-const stickyTable = 'sticky_details';
+const stickyTable = 'sticky_note';
 
-const addStickyInfo = (stickyInfo) => {
+// Add or Update sticky.
+const addUpdateSticky = (stickyInfo) => {
   if (typeof empInfo === 'object') {
     return Promise.reject();
   }
   const id = parseInt(stickyInfo.id, 10) || chance.integer({ min: 1, max: 99999 });
-  const newValue = {
-    stickyId: id,
-    note: stickyInfo.note,
-    created_time: moment.utc().format(),
+  const stickyDetails = {
+    sticky_id: id,
+    sticky_note: stickyInfo.note,
+    sticky_time: moment.utc().format(),
+    sticky_status: true,
   };
   return stickyInfo.id
-    ? updateOne(stickyTable, { stickyId: id }, newValue)
-    : insertOne(stickyTable, newValue);
+    ? updateOne(stickyTable, { sticky_id: id }, stickyDetails)
+    : insertOne(stickyTable, stickyDetails);
+};
+
+// Change status if user deletes the Sticky (Soft delete).
+const deleteSticky = (stickyId) => {
+  if (!stickyId) {
+    return 'something went wrong';
+  }
+  return updateOne(stickyTable, { sticky_id: stickyId }, { status: false });
 };
 
 module.exports = {
-  addStickyInfo,
+  addUpdateSticky,
+  deleteSticky,
 };
 
