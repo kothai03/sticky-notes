@@ -1,6 +1,6 @@
 <!-- HTML5 -->
 <!doctype html>
-<html>
+<html data-ng-app="sticky">
   <!-- Set character encoding for the document -->
   <meta charset="utf-8">
   <!-- Viewport for responsive web design -->
@@ -13,17 +13,13 @@
       crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script src="sticky-controller.js"></script>
+    <script src="sticky-service.js"></script>
+    <script src="sticky-directive.js"></script>
+    <script src="core.js"></script>
   </head>
-  <body ng-controller="mainController">
-      <div class="container">
-        <div class="wrapper">
-          <form class="form-sticky">
-            <h2 class="form-sticky-heading">Sticky</h2>
-            <input type="text" class="form-control"  placeholder="add sticky" required="" autofocus="" />
-            <button class="btn btn-lg btn-primary btn-block form-submit" type="submit">Create</button>
-          </form>
-        </div>
-      </div>
-    </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+  <body data-ng-controller="mainController">
+    <sticky-note></sticky-note>
+  </body>
 </html>

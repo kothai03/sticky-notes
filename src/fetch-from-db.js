@@ -2,10 +2,11 @@
 const db = require('./mongo');
 
 // Fetch single record from Collection.
-const findOne = (collectionName, queryOptions) =>
+const findAll = (collectionName, queryOptions) =>
   new Promise((resolve, reject) => {
     db.collection(collectionName)
-      .findOne(queryOptions, (err, result) => {
+      .find(queryOptions)
+      .toArray((err, result) => {
         if (err) return reject(err);
         return resolve(result);
       });
@@ -35,7 +36,7 @@ const updateOne = (collectionName, queryOptions) =>
   });
 
 module.exports = {
-  findOne,
+  findAll,
   insertOne,
   updateOne,
 };

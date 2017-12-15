@@ -1,12 +1,15 @@
 const Chance = require('chance');
 const moment = require('moment');
-const { insertOne, updateOne } = require('./fetch-from-db');
+const { insertOne, updateOne, findAll } = require('./fetch-from-db');
 
 // Instantiate Chance for randam genration.(randam can be number, phone, string ...)
 const chance = new Chance();
 
 // Add Collection names.
 const stickyTable = 'sticky_note';
+
+// get All sticky
+const getAllSticky = () => findAll(stickyTable, { sticky_status: { $gt: 0 } });
 
 // Add sticky.
 const addSticky = (stickyInfo) => {
@@ -37,5 +40,6 @@ const updateDeleteSticky = (stickyId, stickeyStatus) => {
 module.exports = {
   addSticky,
   updateDeleteSticky,
+  getAllSticky,
 };
 

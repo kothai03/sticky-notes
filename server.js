@@ -8,7 +8,7 @@ const path = require('path');
 // Custom dependecy.
 const config = require('./config');
 const db = require('./src/mongo');
-const { addStickyInfo, updateSticky } = require('./src/routes');
+const { getSticky, addStickyInfo, updateSticky } = require('./src/routes');
 
 const app = express();
 const router = express.Router();
@@ -21,9 +21,10 @@ app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, 'client')));
 
 // routes.
-router.post('/add', addStickyInfo);
-router.put('/update/:id/:status', updateSticky);
-router.delete('/remove/:id/:status', updateSticky);
+router.get('/v1/stickies', getSticky);
+router.post('/v1/add', addStickyInfo);
+router.put('/v1/update/:id/:status', updateSticky);
+router.delete('/v1/remove/:id/:status', updateSticky);
 
 db.open((err, dbConfig) => {
   if (err) throw err;

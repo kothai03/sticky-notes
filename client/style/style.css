@@ -7,8 +7,12 @@ body {
 	margin-top: 10px
 }
 .wrapper {	
-	margin-top: 80px;
+	margin-top: 10px;
   margin-bottom: 80px;
+}
+
+.btn:focus {
+  outline: none;
 }
 
 .form-sticky {
