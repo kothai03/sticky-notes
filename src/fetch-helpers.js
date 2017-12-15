@@ -1,28 +1,41 @@
 const Chance = require('chance');
 const moment = require('moment');
-
-const chance = new Chance();
 const { insertOne, updateOne } = require('./fetch-from-db');
 
-// Add Collection names.
-const stickyTable = 'sticky_details';
+// Instantiate Chance for randam genration.(randam can be number, phone, string ...)
+const chance = new Chance();
 
-const addStickyInfo = (stickyInfo) => {
-  if (typeof empInfo === 'object') {
-    return Promise.reject();
+// Add Collection names.
+const stickyTable = 'sticky_note';
+
+// Add sticky.
+const addSticky = (stickyInfo) => {
+  let stickyDetails = {};
+  if (stickyInfo) {
+    stickyDetails = {
+      sticky_id: chance.integer({ min: 1, max: 99999 }),
+      sticky_note: stickyInfo.note,
+      sticky_time: moment.utc().format(),
+      sticky_status: 1,
+    };
   }
-  const id = parseInt(stickyInfo.id, 10) || chance.integer({ min: 1, max: 99999 });
-  const newValue = {
-    stickyId: id,
-    note: stickyInfo.note,
-    created_time: moment.utc().format(),
+  return insertOne(stickyTable, stickyDetails);
+};
+
+// Change status if user deletes the Sticky (Soft delete).
+const updateDeleteSticky = (stickyId, stickeyStatus) => {
+  if (!stickyId) {
+    return 'something went wrong';
+  }
+  const queryOptions = {
+    id: parseInt(stickyId, 10),
+    status: stickeyStatus,
   };
-  return stickyInfo.id
-    ? updateOne(stickyTable, { stickyId: id }, newValue)
-    : insertOne(stickyTable, newValue);
+  return updateOne(stickyTable, queryOptions);
 };
 
 module.exports = {
-  addStickyInfo,
+  addSticky,
+  updateDeleteSticky,
 };
 
