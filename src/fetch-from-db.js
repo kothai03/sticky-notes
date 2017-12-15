@@ -22,18 +22,16 @@ const insertOne = (collectionName, queryOptions) =>
   });
 
 // Update document.
-const updateOne = (collectionName, queryOptions, stickyDetails) =>
+const updateOne = (collectionName, queryOptions) =>
   new Promise((resolve, reject) => {
     db.collection(collectionName)
       .update(
-        queryOptions,
-        stickyDetails,
-        { upsert: true },
+        { sticky_id: queryOptions.id },
+        { $set: { sticky_status: queryOptions.status } },
         (err, result) => {
           if (err) return reject(err);
           return resolve(result);
-        },
-      );
+        });
   });
 
 module.exports = {
