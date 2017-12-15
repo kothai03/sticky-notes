@@ -11,9 +11,6 @@ var app = angular.module('stickyService', [])
 			},
 			update: function(id, status) {
 				return $http.put('/v1/update/' + id + '/' + status);
-			},
-			delete: function(id, status) {
-				return $http.delete('/v1/remove' + id + '/' + status);
 			}
 		}
 	}]);
