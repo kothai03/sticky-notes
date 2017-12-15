@@ -1,0 +1,33 @@
+@import "bourbon";
+
+body {
+	background: #eee;	
+}
+.form-submit {
+	margin-top: 10px
+}
+.wrapper {	
+	margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-sticky {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  background-color: #fff;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 5px;  
+}
+.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+}
+
+input[type="text"] {
+	border-bottom-left-radius: 10;
+	border-bottom-right-radius: 10;
+}
+
+
