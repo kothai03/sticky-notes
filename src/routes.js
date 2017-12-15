@@ -24,7 +24,7 @@ const addStickyInfo = (req, res) => {
 const updateSticky = (req, res) => {
   const stickyId = req.params.id || res.send('oops! Please add the sticky information');
   const status = req.params.status || res.send('oops! Please add the sticky information');
-  // add sticky details.
+  // update sticky details.
   updateDeleteSticky(stickyId, status)
     .then((response) => {
       if (response.result.ok === 1) {
