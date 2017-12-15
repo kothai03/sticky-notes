@@ -24,7 +24,6 @@ app.use('/', express.static(path.join(__dirname, 'client')));
 router.get('/v1/stickies', getSticky);
 router.post('/v1/add', addStickyInfo);
 router.put('/v1/update/:id/:status', updateSticky);
-router.delete('/v1/remove/:id/:status', updateSticky);
 
 db.open((err, dbConfig) => {
   if (err) throw err;

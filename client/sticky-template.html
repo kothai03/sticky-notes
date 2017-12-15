@@ -2,14 +2,18 @@
   <div class="wrapper">
     <form class="form-sticky">
       <h2 class="form-sticky-heading">Sticky</h2>
-      <input type="text" class="form-control" placeholder="add sticky" required="" autofocus="" data-ng-model="stickyData.note"
+      <input type="text" class="form-control" placeholder="add sticky" required="" data-ng-model="stickyData.note"
       />
       <button class="btn btn-lg btn-primary btn-block form-submit" data-ng-click="createSticky()">Create</button>
     </form>
   </div>
-  <div class="checkbox" ng-repeat="sticky in stickies">
-    <div>
-      <h2> {{sticky.sticky_note}} </h2>
+  <div class="sticky-container">
+    <div class="sticky-box" data-ng-repeat="sticky in stickies track by $index" id="sticky-class-{{$index}}">
+      <h4> {{sticky.sticky_note}}</h4>
+      <div class="sticky-buttons">
+        <button class="btn btn-light" data-ng-click="updateSticky(sticky.sticky_id, 0, $index)">Delete</button>
+        <button class="btn btn-primary" data-ng-click="updateSticky(sticky.sticky_id, 2, $index)">Done</button>
+      </div>
     </div>
   </div>
 </div>

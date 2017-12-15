@@ -9,7 +9,7 @@ const chance = new Chance();
 const stickyTable = 'sticky_note';
 
 // get All sticky
-const getAllSticky = () => findAll(stickyTable, { sticky_status: { $gt: 0 } });
+const getAllSticky = () => findAll(stickyTable, { sticky_status: { $ne: 0 } });
 
 // Add sticky.
 const addSticky = (stickyInfo) => {
@@ -19,7 +19,7 @@ const addSticky = (stickyInfo) => {
       sticky_id: chance.integer({ min: 1, max: 99999 }),
       sticky_note: stickyInfo.note,
       sticky_time: moment.utc().format(),
-      sticky_status: 1,
+      sticky_status: parseInt(1, 10),
     };
   }
   return insertOne(stickyTable, stickyDetails);
@@ -32,7 +32,7 @@ const updateDeleteSticky = (stickyId, stickeyStatus) => {
   }
   const queryOptions = {
     id: parseInt(stickyId, 10),
-    status: stickeyStatus,
+    status: parseInt(stickeyStatus, 10),
   };
   return updateOne(stickyTable, queryOptions);
 };
