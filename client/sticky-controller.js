@@ -6,12 +6,14 @@ var app = angular.module('stickyController', []);
     'StickyService',
     function ($scope, $http, StickyService) {
       $scope.stickyData = {};
-      StickyService
-        .get()
-        .then(function (result) {
-          $scope.stickies = result.data;
-        });
-
+      $scope.init = function() {
+        StickyService
+          .get()
+          .then(function (result) {
+            $scope.stickies = result.data;
+          });
+      }
+      $scope.init();
       $scope.createSticky = function () {
         if ($scope.stickyData.note) {
           StickyService.create($scope.stickyData)
@@ -33,6 +35,7 @@ var app = angular.module('stickyController', []);
                   .indexOf(id);
                 $scope.stickies.splice(index, 1);
               }
+            else  $scope.init();
           });
       };
     }
