@@ -4,6 +4,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan');
+const helmet = require('helmet');
 
 // Custom dependecy.
 const config = require('./config');
@@ -14,10 +16,12 @@ const app = express();
 const router = express.Router();
 
 // Application middleware goes here.
-// parse application/x-www-form-urlencoded
+// parse application/x-www-form-urlencoded.
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+app.use(morgan('combined')); // for logging.
+app.use(helmet.hidePoweredBy()); // Helmet helps you secure our application.
 app.use('/', express.static(path.join(__dirname, 'client')));
 
 // routes.
@@ -27,7 +31,7 @@ router.put('/v1/update/:id/:status', updateSticky);
 
 db.open((err, dbConfig) => {
   if (err) throw err;
-  // route specific middleware - will expose the database to route
+  // route specific middleware - will expose the database to route.
   const exposeDb = (req, resp, next) => {
     req.mongoDb = dbConfig;
     next();

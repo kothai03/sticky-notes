@@ -1,5 +1,6 @@
 const Chance = require('chance');
 const moment = require('moment');
+const Boom = require('boom');
 const { insertOne, updateOne, findAll } = require('./fetch-from-db');
 
 // Instantiate Chance for randam genration.(randam can be number, phone, string ...)
@@ -28,7 +29,7 @@ const addSticky = (stickyInfo) => {
 // Change status if user deletes the Sticky (Soft delete).
 const updateDeleteSticky = (stickyId, stickeyStatus) => {
   if (!stickyId) {
-    return 'something went wrong';
+    return Boom.badImplementation('Please send sticky ID');
   }
   const queryOptions = {
     id: parseInt(stickyId, 10),

@@ -6,6 +6,7 @@ var app = angular.module('stickyController', []);
     'StickyService',
     function ($scope, $http, StickyService) {
       $scope.stickyData = {};
+      // get all sticky when application starts.
       $scope.init = function() {
         StickyService
           .get()
@@ -14,6 +15,7 @@ var app = angular.module('stickyController', []);
           });
       }
       $scope.init();
+      // create sticky here.
       $scope.createSticky = function () {
         if ($scope.stickyData.note) {
           StickyService.create($scope.stickyData)
@@ -24,7 +26,7 @@ var app = angular.module('stickyController', []);
         }
         $scope.stickyData = {};
       };
-
+      // Update sticky here.
       $scope.updateSticky = function (id, status, index) {
         var index;
         StickyService.update(id, status)
