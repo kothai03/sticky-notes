@@ -8,8 +8,8 @@
     </form>
   </div>
   <div class="sticky-container">
-    <div class="sticky-box" data-ng-repeat="sticky in stickies track by $index" id="sticky-class-{{$index}}">
-      <h4> {{sticky.sticky_note}}</h4>
+    <div class="sticky-box" data-ng-repeat="sticky in stickies track by $index" ng-class="{done: sticky.sticky_status === 2}">
+      <h4> {{sticky.sticky_note}}{{ sticky.sticky_status}}</h4>
       <div class="sticky-buttons">
         <button class="btn btn-light" data-ng-click="updateSticky(sticky.sticky_id, 0, $index)">Delete</button>
         <button class="btn btn-primary" data-ng-click="updateSticky(sticky.sticky_id, 2, $index)">Done</button>
