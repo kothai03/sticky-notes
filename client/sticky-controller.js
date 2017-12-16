@@ -33,10 +33,6 @@ var app = angular.module('stickyController', []);
                   .indexOf(id);
                 $scope.stickies.splice(index, 1);
               }
-            else {
-              document.getElementById('sticky-class-'+index)
-              .setAttribute("style", "background-color: #90EE90");
-            }
           });
       };
     }

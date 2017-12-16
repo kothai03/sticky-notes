@@ -46,3 +46,6 @@ input[type="text"] {
 	margin-top: 30px;
 }
 
+.done {
+	background-color: #90EE90;
+}
